@@ -1,0 +1,14 @@
+.sidebar{
+    background-color:#d0d0d0;
+    height: 100vh;
+    width: 200px;
+    padding-top: 1px;
+}
+
+.sidebar ul {
+ 
+  }
+  .sidebar li {
+    list-style-position: inside;
+    text-align: start;
+  }

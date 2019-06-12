@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+	"question": "Which is the fastest animal in the world?",
+	"options": ["Tiger","Cheetah","Ostrich","Bull"]
+
+	},
+	{ "question": "Who is the richest man in the world?",
+	"options": ["M. Ambani","Bill Gates","Jeff Bezos","Elon Musk"]
+
+	},
+	{ "question": "Who is current cricket World Champion?",
+	"options": ["India","West Indies","Auatralia","England"]
+
+	}
+  ]
+}

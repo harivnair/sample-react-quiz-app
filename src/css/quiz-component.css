@@ -1,0 +1,15 @@
+.QuestionBanner{
+    height: 40px;
+    background-color: blue;
+    color: white;
+    display:flex;
+    justify-content: center;
+    line-height: 2px;
+    align-items: center;
+}
+.next-button{
+    float: right
+}
+.prev-button{
+    float: left
+}
