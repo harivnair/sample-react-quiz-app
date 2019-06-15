@@ -15,10 +15,10 @@ export default class QuizComponent extends Component {
       questionLength: 0,
       active: false,
       addedClassNames: [
-        "btn btn-primary",
-        "btn btn-primary",
-        "btn btn-primary",
-        "btn btn-primary"
+        "btn btn-info",
+        "btn btn-info",
+        "btn btn-info",
+        "btn btn-info"
       ]
     };
     this.nextQuestion = this.nextQuestion.bind(this);
@@ -34,10 +34,10 @@ export default class QuizComponent extends Component {
         rawData: res.data,
         questionLength: res.data.length,
         addedClassNames: [
-          "btn btn-primary",
-          "btn btn-primary",
-          "btn btn-primary",
-          "btn btn-primary"
+          "btn btn-info",
+          "btn btn-info",
+          "btn btn-info",
+          "btn btn-info"
         ]
       });
     });
@@ -50,15 +50,15 @@ export default class QuizComponent extends Component {
     let updatedClassNames = this.state.addedClassNames;
     updatedClassNames.map((val, index) => {
       if (index === Number(e.currentTarget.dataset.id)) {
-        if(updatedClassNames[index] === "btn btn-success"){
-          updatedClassNames[index] = "btn btn-primary";
+        if(updatedClassNames[index] === "btn btn-warning"){
+          updatedClassNames[index] = "btn btn-info";
         }
         else{
-          updatedClassNames[index] = "btn btn-success";
+          updatedClassNames[index] = "btn btn-warning";
         }
         
       } else {
-        updatedClassNames[index] = "btn btn-primary";
+        updatedClassNames[index] = "btn btn-info";
       }
       return updatedClassNames;
     });
@@ -69,7 +69,7 @@ export default class QuizComponent extends Component {
       arrayIndex: this.state.arrayIndex - 1,
       quizData: this.state.rawData[this.state.arrayIndex - 1],
       quizOptData: this.state.rawData[this.state.arrayIndex - 1].options,
-      addedClassNames:['btn btn-primary','btn btn-primary','btn btn-primary','btn btn-primary']
+      addedClassNames:['btn btn-info','btn btn-info','btn btn-info','btn btn-info']
     });
   }
 
@@ -79,7 +79,7 @@ export default class QuizComponent extends Component {
         arrayIndex: this.state.arrayIndex + 1,
         quizData: this.state.rawData[this.state.arrayIndex + 1],
         quizOptData: this.state.rawData[this.state.arrayIndex + 1].options,
-        addedClassNames:['btn btn-primary','btn btn-primary','btn btn-primary','btn btn-primary']
+        addedClassNames:['btn btn-info','btn btn-info','btn btn-info','btn btn-info']
       });
     } else {
       alert("No more questions");
@@ -92,15 +92,16 @@ export default class QuizComponent extends Component {
       <div className={this.props.className}>
         <Card>
           <CardBody>
-            <CardTitle className="card h-35 w-100 p-3 mb-5 bg-secondary text-white text-center">
+            <CardTitle className="card h-35 w-100 p-3 mb-5 bg-dark text-white text-center">
               {this.state.quizData.question}
             </CardTitle>
 
             <CardText>
               <div className="row d-flex justify-content-center">
+                <div className="col-md-6">
                 <button
                   data-id="0"
-                  className={` w-75 p-3 mb-2 ${
+                  className={`  w-50 h-20 p-3 mb-2  ${
                     this.state.addedClassNames[0]
                   }  text-center`}
                   onClick={this.toggleClass}
@@ -109,11 +110,11 @@ export default class QuizComponent extends Component {
                     ? this.state.quizOptData[0]
                     : "Loading..."}
                 </button>
-              </div>
-              <div className="row d-flex justify-content-center">
-                <button
+                </div>
+              <div  className="col-md-6">
+              <button
                   data-id="1"
-                  className={` w-75 p-3 mb-2 ${
+                  className={`  w-50 h-20 p-3  ml-2 mb-2 ${
                     this.state.addedClassNames[1]
                   }  text-center`}
                   onClick={this.toggleClass}
@@ -123,10 +124,14 @@ export default class QuizComponent extends Component {
                     : "Loading..."}
                 </button>
               </div>
+               
+              </div>
+              
               <div className="row d-flex justify-content-center">
-                <button
+                <div className="col-md-6">
+                   <button
                   data-id="2"
-                  className={` w-75 p-3 mb-2 ${
+                  className={`  w-50 h-9 p-3 mb-2 ${
                     this.state.addedClassNames[2]
                   }  text-center`}
                   onClick={this.toggleClass}
@@ -134,12 +139,11 @@ export default class QuizComponent extends Component {
                   {this.state.quizOptData !== undefined
                     ? this.state.quizOptData[2]
                     : "Loading..."}
-                </button>{" "}
-              </div>
-              <div className="row d-flex justify-content-center">
-                <button
+                </button></div>
+               <div  className="col-md-6">
+               <button
                   data-id="3"
-                  className={` w-75 p-3 mb-2 ${
+                  className={` w-50 h-9 p-3 mb-2 ${
                     this.state.addedClassNames[3]
                   }  text-center`}
                   onClick={this.toggleClass}
@@ -147,26 +151,29 @@ export default class QuizComponent extends Component {
                   {this.state.quizOptData !== undefined
                     ? this.state.quizOptData[3]
                     : "Loading..."}
-                </button>{" "}
+                </button>
+               </div>
+               
               </div>
+             
             </CardText>
             <div className="">
               <button
-                className="next-button btn btn-primary"
+                className="next-button btn btn-info"
                 hidden={this.state.arrayIndex >= this.state.questionLength - 1}
                 onClick={this.nextQuestion}
               >
                 NEXT
               </button>
               <button
-                className="next-button btn btn-primary"
+                className="next-button btn btn-info"
                 hidden={this.state.arrayIndex < this.state.questionLength - 1}
                 onClick={this.finishQuiz}
               >
                 FINISH QUIZ
               </button>
               <button
-                className="prev-button btn btn-primary"
+                className="prev-button btn btn-info"
                 hidden={this.state.arrayIndex === 0}
                 onClick={this.prevQuestion}
               >
