@@ -17,10 +17,12 @@ export default class QuizComponent extends Component {
       quizData: [],
       rawData:[],
       arrayIndex:0,
-      questionLength:0
+      questionLength:0,
+      active:false
     }
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
+    this.toggleClass = this.toggleClass.bind(this);
   }
   
   componentDidMount() {
@@ -31,7 +33,8 @@ export default class QuizComponent extends Component {
             quizData: res.data[this.state.arrayIndex],
             quizOptData: res.data[this.state.arrayIndex].options,
             rawData:res.data,
-            questionLength:res.data.length
+            questionLength:res.data.length,
+            
           });
        
       
@@ -41,6 +44,10 @@ export default class QuizComponent extends Component {
   finishQuiz(){
     alert("Quiz finished")
   }
+  toggleClass(){
+    const currentState = this.state.active;
+    this.setState({ active: !currentState });
+  }
   prevQuestion(){
     this.setState({
       arrayIndex: this.state.arrayIndex-1,
@@ -48,8 +55,9 @@ export default class QuizComponent extends Component {
       quizOptData: this.state.rawData[this.state.arrayIndex-1].options,
     });
   }
+  
   nextQuestion(){
-   
+  
     if(this.state.arrayIndex<this.state.questionLength-1){
       this.setState({
         arrayIndex: this.state.arrayIndex+1,
@@ -69,22 +77,20 @@ export default class QuizComponent extends Component {
         
           <Card>
             <CardBody>
-              <CardTitle>{this.state.quizData.question}</CardTitle>
+              <CardTitle className="card h-35 w-100 p-3 mb-2 bg-secondary text-white text-center">{this.state.quizData.question}</CardTitle>
               
               <CardText>
-                <div class="row">
-                <div className="col-md-6"><input className="mr-3" type="radio"></input>
-                {this.state.quizOptData!==undefined?this.state.quizOptData[0]:'Loadiing'}</div>
-                <div className="col-md-6"><input className="mr-3" type="radio"></input>
-                {this.state.quizOptData!==undefined?this.state.quizOptData[1]:'Loadiing'}</div>
+               
+                <div className="row d-flex justify-content-center">
+                  <button className={` w-75 p-3 mb-2 ${this.state.active ? 'btn btn-success': 'btn btn-primary'}  text-center`} onClick={this.toggleClass}>{this.state.quizOptData!==undefined?this.state.quizOptData[0]:'Loading...'}</button>
                 </div>
-                <div class="row">
-                <div className="col-md-6"><input className="mr-3" type="radio"></input>
-                {this.state.quizOptData!==undefined?this.state.quizOptData[2]:'Loadiing'}</div>
-                <div className="col-md-6"><input className="mr-3" type="radio"></input>
-                {this.state.quizOptData!==undefined?this.state.quizOptData[3]:'Loadiing'}</div>
+                <div className="row d-flex justify-content-center">
+                <button className={` w-75 p-3 mb-2 ${this.state.active ? 'btn btn-success': 'btn btn-primary'}  text-center`} onClick={this.toggleClass}>{this.state.quizOptData!==undefined?this.state.quizOptData[1]:'Loading...'}</button>
                 </div>
-
+                <div className="row d-flex justify-content-center">
+                <button className={` w-75 p-3 mb-2 ${this.state.active ? 'btn btn-success': 'btn btn-primary'}  text-center`} onClick={this.toggleClass}>{this.state.quizOptData!==undefined?this.state.quizOptData[2]:'Loading...'}</button>                </div>
+                <div className="row d-flex justify-content-center">
+                <button className={` w-75 p-3 mb-2 ${this.state.active ? 'btn btn-success': 'btn btn-primary'}  text-center`} onClick={this.toggleClass}>{this.state.quizOptData!==undefined?this.state.quizOptData[3]:'Loading...'}</button>                </div>
               </CardText>
               <div className="">
                 <button className="next-button btn btn-primary" hidden={this.state.arrayIndex >= this.state.questionLength-1} onClick={this.nextQuestion}>NEXT</button>
