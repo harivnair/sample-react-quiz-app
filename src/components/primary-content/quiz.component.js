@@ -50,7 +50,13 @@ export default class QuizComponent extends Component {
     let updatedClassNames = this.state.addedClassNames;
     updatedClassNames.map((val, index) => {
       if (index === Number(e.currentTarget.dataset.id)) {
-        updatedClassNames[index] = "btn btn-success";
+        if(updatedClassNames[index] === "btn btn-success"){
+          updatedClassNames[index] = "btn btn-primary";
+        }
+        else{
+          updatedClassNames[index] = "btn btn-success";
+        }
+        
       } else {
         updatedClassNames[index] = "btn btn-primary";
       }
@@ -62,7 +68,8 @@ export default class QuizComponent extends Component {
     this.setState({
       arrayIndex: this.state.arrayIndex - 1,
       quizData: this.state.rawData[this.state.arrayIndex - 1],
-      quizOptData: this.state.rawData[this.state.arrayIndex - 1].options
+      quizOptData: this.state.rawData[this.state.arrayIndex - 1].options,
+      addedClassNames:['btn btn-primary','btn btn-primary','btn btn-primary','btn btn-primary']
     });
   }
 
@@ -71,7 +78,8 @@ export default class QuizComponent extends Component {
       this.setState({
         arrayIndex: this.state.arrayIndex + 1,
         quizData: this.state.rawData[this.state.arrayIndex + 1],
-        quizOptData: this.state.rawData[this.state.arrayIndex + 1].options
+        quizOptData: this.state.rawData[this.state.arrayIndex + 1].options,
+        addedClassNames:['btn btn-primary','btn btn-primary','btn btn-primary','btn btn-primary']
       });
     } else {
       alert("No more questions");
@@ -84,7 +92,7 @@ export default class QuizComponent extends Component {
       <div className={this.props.className}>
         <Card>
           <CardBody>
-            <CardTitle className="card h-35 w-100 p-3 mb-2 bg-secondary text-white text-center">
+            <CardTitle className="card h-35 w-100 p-3 mb-5 bg-secondary text-white text-center">
               {this.state.quizData.question}
             </CardTitle>
 
