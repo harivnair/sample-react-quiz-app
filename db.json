@@ -1,16 +1,24 @@
 {
   "data": [
     {
+	"id":"1",
 	"question": "Which is the fastest animal in the world?",
-	"options": ["Tiger","Cheetah","Ostrich","Bull"]
+	"options": ["Tiger","Cheetah","Ostrich","Bull"],
+	"answer":"Cheetah"
 
 	},
-	{ "question": "Who is the richest man in the world?",
-	"options": ["M. Ambani","Bill Gates","Jeff Bezos","Elon Musk"]
+	{ 
+	"id":"2",
+	"question": "Who is the richest man in the world?",
+	"options": ["M. Ambani","Bill Gates","Jeff Bezos","Elon Musk"],
+	"answer":"Bill Gates"
 
 	},
-	{ "question": "Who is current cricket World Champion?",
-	"options": ["India","West Indies","Auatralia","England"]
+	{ 
+	"id":"3",
+	"question": "Who is current cricket World Champion?",
+	"options": ["India","West Indies","Australia","England"],
+	"answer":"West Indies"
 
 	}
   ]
