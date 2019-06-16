@@ -19,10 +19,12 @@ export default class QuizComponent extends Component {
         "btn btn-info",
         "btn btn-info",
         "btn btn-info"
-      ]
+      ],
+      disabled:false,
+      showNextButton:true
     };
     this.nextQuestion = this.nextQuestion.bind(this);
-    this.prevQuestion = this.prevQuestion.bind(this);
+    // this.prevQuestion = this.prevQuestion.bind(this);
     this.toggleClass = this.toggleClass.bind(this);
   }
 
@@ -38,7 +40,8 @@ export default class QuizComponent extends Component {
           "btn btn-info",
           "btn btn-info",
           "btn btn-info"
-        ]
+        ],
+        showNextButton:true
       });
     });
   }
@@ -48,30 +51,28 @@ export default class QuizComponent extends Component {
   toggleClass(e) {
     //console.log(e.currentTarget.dataset.id)
     let updatedClassNames = this.state.addedClassNames;
+    
     updatedClassNames.map((val, index) => {
       if (index === Number(e.currentTarget.dataset.id)) {
-        if(updatedClassNames[index] === "btn btn-warning"){
-          updatedClassNames[index] = "btn btn-info";
-        }
-        else{
-          updatedClassNames[index] = "btn btn-warning";
-        }
-        
+        updatedClassNames[index] = "btn btn-warning";
+        this.setState({ disabled:false });
       } else {
         updatedClassNames[index] = "btn btn-info";
+        this.setState({ disabled:true });
+
       }
       return updatedClassNames;
     });
-    this.setState({ addedClassNames: updatedClassNames });
+    this.setState({ addedClassNames: updatedClassNames, showNextButton:false });
   }
-  prevQuestion() {
-    this.setState({
-      arrayIndex: this.state.arrayIndex - 1,
-      quizData: this.state.rawData[this.state.arrayIndex - 1],
-      quizOptData: this.state.rawData[this.state.arrayIndex - 1].options,
-      addedClassNames:['btn btn-info','btn btn-info','btn btn-info','btn btn-info']
-    });
-  }
+  // prevQuestion() {
+  //   this.setState({
+  //     arrayIndex: this.state.arrayIndex - 1,
+  //     quizData: this.state.rawData[this.state.arrayIndex - 1],
+  //     quizOptData: this.state.rawData[this.state.arrayIndex - 1].options,
+  //     addedClassNames:['btn btn-info','btn btn-info','btn btn-info','btn btn-info']
+  //   });
+  // }
 
   nextQuestion() {
     if (this.state.arrayIndex < this.state.questionLength - 1) {
@@ -79,7 +80,9 @@ export default class QuizComponent extends Component {
         arrayIndex: this.state.arrayIndex + 1,
         quizData: this.state.rawData[this.state.arrayIndex + 1],
         quizOptData: this.state.rawData[this.state.arrayIndex + 1].options,
-        addedClassNames:['btn btn-info','btn btn-info','btn btn-info','btn btn-info']
+        addedClassNames:['btn btn-info','btn btn-info','btn btn-info','btn btn-info'],
+        disabled:false,
+       showNextButton:true
       });
     } else {
       alert("No more questions");
@@ -99,7 +102,7 @@ export default class QuizComponent extends Component {
             <CardText>
               <div className="row d-flex justify-content-center">
                 <div className="col-md-6">
-                <button
+                <button disabled={this.state.disabled}
                   data-id="0"
                   className={`  w-50 h-20 p-3 mb-2  ${
                     this.state.addedClassNames[0]
@@ -112,7 +115,7 @@ export default class QuizComponent extends Component {
                 </button>
                 </div>
               <div  className="col-md-6">
-              <button
+              <button disabled={this.state.disabled}
                   data-id="1"
                   className={`  w-50 h-20 p-3  ml-2 mb-2 ${
                     this.state.addedClassNames[1]
@@ -129,7 +132,7 @@ export default class QuizComponent extends Component {
               
               <div className="row d-flex justify-content-center">
                 <div className="col-md-6">
-                   <button
+                   <button disabled={this.state.disabled}
                   data-id="2"
                   className={`  w-50 h-9 p-3 mb-2 ${
                     this.state.addedClassNames[2]
@@ -141,7 +144,7 @@ export default class QuizComponent extends Component {
                     : "Loading..."}
                 </button></div>
                <div  className="col-md-6">
-               <button
+               <button disabled={this.state.disabled}
                   data-id="3"
                   className={` w-50 h-9 p-3 mb-2 ${
                     this.state.addedClassNames[3]
@@ -160,7 +163,7 @@ export default class QuizComponent extends Component {
             <div className="">
               <button
                 className="next-button btn btn-info"
-                hidden={this.state.arrayIndex >= this.state.questionLength - 1}
+                hidden={this.state.showNextButton || (!(this.state.arrayIndex < this.state.questionLength - 1))}
                 onClick={this.nextQuestion}
               >
                 NEXT
@@ -172,13 +175,13 @@ export default class QuizComponent extends Component {
               >
                 FINISH QUIZ
               </button>
-              <button
+              {/* <button
                 className="prev-button btn btn-info"
                 hidden={this.state.arrayIndex === 0}
-                onClick={this.prevQuestion}
+                 onClick={this.prevQuestion}
               >
                 PREV
-              </button>
+              </button> */}
             </div>
           </CardBody>
         </Card>
