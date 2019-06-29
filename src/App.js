@@ -12,7 +12,7 @@ function App() {
   }
   return (
     <div >
-      <Header className="header" />
+      {/* <Header className="header" /> */}
       <div style={flexDisplay}>
       <Sidebar className="sidebar" />
       <PrimaryContent className="primary-content"></PrimaryContent>
