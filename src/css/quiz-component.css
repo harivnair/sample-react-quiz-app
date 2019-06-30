@@ -13,3 +13,6 @@
 .prev-button{
     float: left
 }
+.btn:hover{
+    transform: scale(1.20);
+}

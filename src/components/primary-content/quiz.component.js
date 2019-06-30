@@ -94,8 +94,9 @@ export default class QuizComponent extends Component {
         this.setState({ disabled: false });
       } else {
         updatedClassNames[index] = "btn btn-info";
-        this.setState({ disabled: true });
+        
       }
+      this.setState({ disabled: true });
       return updatedClassNames;
     });
     this.setState({
