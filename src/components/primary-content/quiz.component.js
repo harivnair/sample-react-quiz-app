@@ -35,7 +35,7 @@ export default class QuizComponent extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3004/data/`).then(res => {
+    axios.get(`http://localhost:8080/getQuizData/`).then(res => {
       this.setState({
         quizData: res.data[this.state.arrayIndex],
         quizOptData: res.data[this.state.arrayIndex].options,
@@ -73,7 +73,7 @@ export default class QuizComponent extends Component {
       disabled: false,
       showNextButton: true,
       answer: this.state.rawData[0].answer,
-      rightAnswers:0
+      rightAnswers: 0
     });
   }
   finishQuiz() {
@@ -94,7 +94,7 @@ export default class QuizComponent extends Component {
         this.setState({ disabled: false });
       } else {
         updatedClassNames[index] = "btn btn-info";
-        
+
       }
       this.setState({ disabled: true });
       return updatedClassNames;
@@ -138,95 +138,95 @@ export default class QuizComponent extends Component {
   render() {
     return (
       <div className={this.props.className}>
-      
+
         <Card>
-        <CardTitle className="card h-35 w-100 p-3 mb-5 bg-dark text-white text-center">
-              {this.state.quizData.question}
-            </CardTitle>
+          <CardTitle className="card h-35 w-100 p-3 mb-5 bg-dark text-white text-center">
+            {this.state.quizData.question}
+          </CardTitle>
           <CardBody>
-           
-           
-              <div className="row d-flex justify-content-center">
-                <div className="col-md-6">
-                  <button
-                    disabled={this.state.disabled}
-                    data-id="0"
-                    className={`  w-50 h-20 p-3 mb-2  ${
-                      this.state.addedClassNames[0]
+
+
+            <div className="row d-flex justify-content-center">
+              <div className="col-md-6">
+                <button
+                  disabled={this.state.disabled}
+                  data-id="0"
+                  className={`  w-50 h-20 p-3 mb-2  ${
+                    this.state.addedClassNames[0]
                     }  text-center`}
-                    onClick={this.toggleClass}
-                  >
-                    {this.state.quizOptData !== undefined
-                      ? this.state.quizOptData[0]
-                      : "Loading..."}
-                  </button>
-                </div>
-                <div className="col-md-6">
-                  <button
-                    disabled={this.state.disabled}
-                    data-id="1"
-                    className={`  w-50 h-20 p-3  ml-2 mb-2 ${
-                      this.state.addedClassNames[1]
-                    }  text-center`}
-                    onClick={this.toggleClass}
-                  >
-                    {this.state.quizOptData !== undefined
-                      ? this.state.quizOptData[1]
-                      : "Loading..."}
-                  </button>
-                </div>
-              </div>
-              {!this.state.hideScore && (
-                <SweetAlert
-                  success
-                  showCancel
-                  confirmBtnText="Try Again"
-                  cancelBtnText="Close"
-                  onCancel={this.onClose}
-                  title={
-                    "You've scored " +
-                    Number(
-                      (this.state.rightAnswers / this.state.questionLength) *
-                        100
-                    ).toFixed(2) +
-                    "%"
-                  }
-                  onConfirm={this.goToHome}
+                  onClick={this.toggleClass}
                 >
-                  Quiz Over
-                </SweetAlert>
-              )}
-              <div className="row d-flex justify-content-center">
-                <div className="col-md-6">
-                  <button
-                    disabled={this.state.disabled}
-                    data-id="2"
-                    className={`  w-50 h-9 p-3 mb-2 ${
-                      this.state.addedClassNames[2]
-                    }  text-center`}
-                    onClick={this.toggleClass}
-                  >
-                    {this.state.quizOptData !== undefined
-                      ? this.state.quizOptData[2]
-                      : "Loading..."}
-                  </button>
-                </div>
-                <div className="col-md-6">
-                  <button
-                    disabled={this.state.disabled}
-                    data-id="3"
-                    className={` w-50 h-9 ml-2 p-3 mb-2 ${
-                      this.state.addedClassNames[3]
-                    }  text-center`}
-                    onClick={this.toggleClass}
-                  >
-                    {this.state.quizOptData !== undefined
-                      ? this.state.quizOptData[3]
-                      : "Loading..."}
-                  </button>
-                </div>
+                  {this.state.quizOptData !== undefined
+                    ? this.state.quizOptData[0]
+                    : "Loading..."}
+                </button>
               </div>
-           
+              <div className="col-md-6">
+                <button
+                  disabled={this.state.disabled}
+                  data-id="1"
+                  className={`  w-50 h-20 p-3  ml-2 mb-2 ${
+                    this.state.addedClassNames[1]
+                    }  text-center`}
+                  onClick={this.toggleClass}
+                >
+                  {this.state.quizOptData !== undefined
+                    ? this.state.quizOptData[1]
+                    : "Loading..."}
+                </button>
+              </div>
+            </div>
+            {!this.state.hideScore && (
+              <SweetAlert
+                success
+                showCancel
+                confirmBtnText="Try Again"
+                cancelBtnText="Close"
+                onCancel={this.onClose}
+                title={
+                  "You've scored " +
+                  Number(
+                    (this.state.rightAnswers / this.state.questionLength) *
+                    100
+                  ).toFixed(2) +
+                  "%"
+                }
+                onConfirm={this.goToHome}
+              >
+                Quiz Over
+                </SweetAlert>
+            )}
+            <div className="row d-flex justify-content-center">
+              <div className="col-md-6">
+                <button
+                  disabled={this.state.disabled}
+                  data-id="2"
+                  className={`  w-50 h-9 p-3 mb-2 ${
+                    this.state.addedClassNames[2]
+                    }  text-center`}
+                  onClick={this.toggleClass}
+                >
+                  {this.state.quizOptData !== undefined
+                    ? this.state.quizOptData[2]
+                    : "Loading..."}
+                </button>
+              </div>
+              <div className="col-md-6">
+                <button
+                  disabled={this.state.disabled}
+                  data-id="3"
+                  className={` w-50 h-9 ml-2 p-3 mb-2 ${
+                    this.state.addedClassNames[3]
+                    }  text-center`}
+                  onClick={this.toggleClass}
+                >
+                  {this.state.quizOptData !== undefined
+                    ? this.state.quizOptData[3]
+                    : "Loading..."}
+                </button>
+              </div>
+            </div>
+
             <div className="">
               <button
                 className="next-button btn btn-info"

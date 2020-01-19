@@ -23,7 +23,7 @@ class QuizStartup extends React.Component {
     return (
       <div>
         {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} >
           <ModalHeader toggle={this.toggle}>Welcome to the quiz</ModalHeader>
           <ModalBody>
 {'You are going to start a quiz which contains 10 questions. On winning the quiz you will awarded a 🏆' }</ModalBody>
